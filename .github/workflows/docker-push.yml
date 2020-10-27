@@ -33,14 +33,14 @@ jobs:
         run: |
           docker buildx build --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
           --output "type=image,push=true" \
-          --tag "${{ secrets.DOCKER_USERNAME }}/v2fly-core:latest" \
+          --tag "${{ secrets.DOCKER_USERNAME }}/v2:latest" \
           --file Dockerfile .
        
       - name: Build tag
         run: |
           docker buildx build --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
           --output "type=image,push=true" \
-          --tag "${{ secrets.DOCKER_USERNAME }}/v2fly-core:${{ env.TAG }}" \
+          --tag "${{ secrets.DOCKER_USERNAME }}/v2:${{ env.TAG }}" \
           --file Dockerfile .
   test:
     needs: build
@@ -57,5 +57,5 @@ jobs:
 
       - name: Test Docker image
         run: |
-          docker run --rm --entrypoint /usr/bin/v2ray ${{ secrets.DOCKER_USERNAME }}/v2fly-core:latest -version
-          docker run --rm --entrypoint /usr/bin/v2ray ${{ secrets.DOCKER_USERNAME }}/v2fly-core:${{ env.TAG }} -version
+          docker run --rm --entrypoint /usr/bin/v2ray ${{ secrets.DOCKER_USERNAME }}/v2:latest -version
+          docker run --rm --entrypoint /usr/bin/v2ray ${{ secrets.DOCKER_USERNAME }}/v2:${{ env.TAG }} -version

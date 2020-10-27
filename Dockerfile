@@ -4,7 +4,7 @@ LABEL maintainer "V2Fly Community <dev@v2fly.org>"
 WORKDIR /root
 ARG TARGETPLATFORM
 COPY v2ray.sh /root/v2ray.sh
-COPY config.json /root/config.json
+COPY config.json /config.json
 
 RUN set -ex \
 	&& apk add --no-cache tzdata openssl ca-certificates \
